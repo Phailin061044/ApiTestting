@@ -126,8 +126,12 @@ app.put("/update/:id", (req, res) => {
  *        description: User deleted
  */
 app.delete("/delete/:id", (req, res) => {
-  // ... (same as before)
-});
+  const sql = `DELETE FROM users WHERE id = ${req.params.id}`;
+  db.query(sql, (err, result) => {
+    if (err) throw err;
+    res.send("User deleted...");
+  });
+}); 
 
 // Server
 app.listen(3000, () => {
